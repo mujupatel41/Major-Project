@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const mongoose = require("mongoose");
+const Listing = require("./models/listingModel.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/Wanderlust";
 
@@ -18,6 +19,20 @@ async function main(){
 app.get("/", (req, res)=>{
     res.send("Hii I am @mujupatel41");
 });
+
+// app.get("/testing", async (req, res)=>{
+//     let data = await Listing({
+//         title: "My Home",
+//         description: "Peaceful Place",
+//         image: "",
+//         price: 12999,
+//         location: "Jalgaon, Maharashtra",
+//         country: "India",
+//     });
+//     console.log(data);
+//     data.save();
+//     res.send("Data Collected");
+// });
 
 app.listen(port, ()=>{
     console.log(`Server is listening to port ${port}`);
