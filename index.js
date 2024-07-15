@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const path = require("path");
 const Listing = require("./models/listingModel.js");
 
@@ -11,6 +12,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 main().then((res)=>{
     console.log("Connected to DB");
@@ -73,6 +75,20 @@ app.get("/listings/:id", async (req, res)=>{
     let listing = await Listing.findById(id);
     res.render("listings/show.ejs", {listing});
 });
+
+// Edit Route
+
+app.get("/listings/:id/edit", async (req, res)=>{
+    let {id} = req.params;
+    let listing = await Listing.findById(id);
+    res.render("listings/edit.ejs", {listing});
+});
+
+app.put("/listings/:id", async (req, res)=>{
+    let {id} = req.params;
+    await Listing.findByIdAndUpdate(id, {...req.body.listing});
+    res.redirect(`/listings/${id}`);
+})
 
 
 
