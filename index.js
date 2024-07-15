@@ -10,6 +10,8 @@ const MONGO_URL = "mongodb://127.0.0.1:27017/Wanderlust";
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(express.urlencoded({extended: true}));
+
 main().then((res)=>{
     console.log("Connected to DB");
 }).catch(err => console.log(err));
@@ -45,6 +47,14 @@ app.get("/listings", async (req, res)=>{
 
     res.render("listings/index.ejs", {listings: allListings});
 });
+
+// Show Route
+
+app.get("/listings/:id", async (req, res)=>{
+    let {id} = req.params;
+    let listing = await Listing.findById(id);
+    res.render("listings/show.ejs", {listing});
+})
 
 app.listen(port, ()=>{
     console.log(`Server is listening to port ${port}`);
