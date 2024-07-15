@@ -48,13 +48,33 @@ app.get("/listings", async (req, res)=>{
     res.render("listings/index.ejs", {listings: allListings});
 });
 
+// New Route
+
+app.get("/listings/new", (req, res)=>{
+    res.render("listings/new.ejs");
+});
+
+// Create Route
+
+app.post("/listings", async (req, res)=>{
+    // let {title, description, image, price, location, country} = req.body;
+
+    let newListing = await Listing(req.body.listing);
+
+    newListing.save();
+
+    res.redirect("/listings");
+});
+
 // Show Route
 
 app.get("/listings/:id", async (req, res)=>{
     let {id} = req.params;
     let listing = await Listing.findById(id);
     res.render("listings/show.ejs", {listing});
-})
+});
+
+
 
 app.listen(port, ()=>{
     console.log(`Server is listening to port ${port}`);
