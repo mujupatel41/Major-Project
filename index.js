@@ -1,10 +1,13 @@
 const express = require("express");
-const app = express();
-const port = 8080;
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
 const path = require("path");
+
 const Listing = require("./models/listingModel.js");
+
+const app = express();
+const port = 8080;
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/Wanderlust";
 
@@ -13,6 +16,9 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.engine("ejs", ejsMate);
 
 main().then((res)=>{
     console.log("Connected to DB");
