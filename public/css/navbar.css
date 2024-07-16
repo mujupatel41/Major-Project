@@ -1,0 +1,14 @@
+.navbar{
+    height: 6rem;
+    background-color: white;
+}
+
+.imgAirbnb{
+    width: 100px;
+    filter: contrast(2);
+    margin-top: 3px;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
