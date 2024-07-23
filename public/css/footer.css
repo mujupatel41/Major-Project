@@ -1,0 +1,148 @@
+footer {
+    background-color: #f6f3f3dc;
+    width: 100%;
+    padding: 3% 0% 0% 5%;
+    margin-top: 30px;
+}
+
+.f-info{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 5rem;
+}
+
+.f-info-social-link > div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.f-info-social-link a{
+    color: black;
+    opacity: 8;
+}
+
+.f-info-social-media{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.footer_hr{
+    margin-right: 5%;
+}
+
+.lang-text{
+    font-weight: 600;
+}
+
+.f-info-social-link{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.f-info-social-media > div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100px
+}
+
+.site-links{
+    width: 20rem;
+}
+
+.social-links{
+    display: inline;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.social-links a{
+    transition: .3s ease-in-out 0s;
+    opacity: .7;
+}
+
+.social-links a:hover{
+    transform: scale(1.5);
+    opacity: 1;
+}
+
+.social-links a img{
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: .25rem;
+
+}
+
+.language{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.footer_inr {
+    font-size: .95rem;
+    font-weight: 700;
+}
+
+@media (max-width: 1050px) {
+    .f-info{
+        flex-direction: column-reverse;
+    }
+}
+
+.footer-muju {
+    font-family: "Dancing Script", cursive !important;
+    font-family: "Popins", sans-serif;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    filter: drop-shadow(2px 2px 4px rgb(11, 8, 46));
+    border-top: 1px solid rgba(0, 0, 0, 0.236);
+    padding: 10px 0px 0px 0px;
+    margin-right: 5px;
+}
+
+.footer-muju p:hover {
+    background: -webkit-linear-gradient(blue, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+}
+
+.footer-muju p {
+    background: -webkit-linear-gradient(#ff0000, black);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: sheck 5s infinite linear;
+}
+
+@keyframes sheck{
+    0% {
+        transform: scale(1);
+    }
+    33% {
+        transform: scale(1.2);
+    } 
+    50% {
+        transform: scale(1);
+    }
+    66% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
