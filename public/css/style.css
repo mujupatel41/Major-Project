@@ -1,5 +1,12 @@
 body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
 }
 
 /* Card Style */
@@ -62,4 +69,12 @@ body {
     z-index: 1;
     filter: contrast(1.15);
     opacity: 1;
+}
+
+
+/* New Listing */
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
 }
