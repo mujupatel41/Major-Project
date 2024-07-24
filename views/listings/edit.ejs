@@ -1,34 +1,46 @@
 <%- layout("/layouts/boilerplate.ejs") %>
 <body>
-    <h1>Edit Listing</h1>
-    <div>
-        <form action="/listings/<%= listing.id %>?_method=PUT" method="post">
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h4>Edit Listing</h4>
+            <form action="/listings/<%= listing.id %>?_method=PUT" method="post">
 
-            <label for="title">Title</label>
-            <input type="text" name="listing[title]" id="title" value="<%= listing.title %>">
-            <br><br>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" name="listing[title]" id="title" value="<%= listing.title %>">
+                </div>
 
-            <label for="description">Description</label>
-            <textarea name="listing[description]"  id="description"><%= listing.description %></textarea>
-            <br><br>
+                <div class="mb-3"> 
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" class="form-control"  id="description"><%= listing.description %></textarea>
+                </div>
 
-            <label for="image">Image URL</label>
-            <input type="text" name="listing[image]" id="image" value="<%= listing.image %>">
-            <br><br>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image URL</label>
+                    <input type="text" class="form-control" name="listing[image]" id="image" value="<%= listing.image %>">
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4" >
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" name="listing[price]" id="price" value="<%= listing.price %>">
+                    </div>
 
-            <label for="price">Price</label>
-            <input type="number" name="listing[price]" id="price" value="<%= listing.price %>">
-            <br><br>
+                    <div class="mb-3 col-md-8">   
+                        <label for="country" class="form-label">Counry</label>
+                        <input type="text" class="form-control" name="listing[country]" id="country" value="<%= listing.country %>">
+                    </div>
+                </div>
+                
 
-            <label for="location">Location</label>
-            <input type="text" name="listing[location]" id="location" value="<%= listing.location %>">
-            <br><br>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" name="listing[location]" id="location" value="<%= listing.location %>">
+                </div>
 
-            <label for="country">Counry</label>
-            <input type="text" name="listing[country]" id="country" value="<%= listing.country %>">
-            <br><br>
 
-            <button>Edit Listing</button>
-        </form>
+                <button class="btn btn-dark edit-btn mt-3">Edit Listing</button>
+            </form>
+        </div>
     </div>
+    
 </body>
