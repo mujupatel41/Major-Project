@@ -10,11 +10,13 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input required type="text" name="listing[title]" class="form-control" id="title" placeholder="Enter Title">
+                    <div class="valid-feedback">Title looks good!</div>
                 </div>
     
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea required name="listing[description]" class="form-control"  placeholder="Enter Description" id="description"></textarea>
+                    <div class="invalid-feedback">Please enter a short description</div>
                 </div>
     
                 <div class="mb-3">
@@ -27,11 +29,13 @@
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price</label>
                         <input required type="number" class="form-control" name="listing[price]" id="price" placeholder="1200">   
+                        <div class="invalid-feedback">Price should be valid</div>
                     </div>
 
                     <div class="mb-3 col-md-8">
-                        <label for="country" class="form-label" >Counry</label>
+                        <label for="country" class="form-label" >Country</label>
                         <input required type="text" class="form-control" name="listing[country]" id="country" placeholder="India">
+                        <div class="invalid-feedback">Country name should be valid</div>
                     </div>
 
                 </div>
@@ -39,6 +43,7 @@
                 <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
                     <input required type="text" class="form-control" name="listing[location]" id="location" placeholder="Delhi">
+                    <div class="invalid-feedback">Location should be valid</div>
                 </div>
     
                 <button class="btn btn-dark add-btn mt-3">Create Listing</button>
