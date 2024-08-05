@@ -5,6 +5,7 @@ const ejsMate = require("ejs-mate");
 const path = require("path");
 
 const Listing = require("./models/listingModel.js");
+const wrapAsync = require("./utils/wrapAsync.js");
 
 const app = express();
 const port = 8080;
@@ -64,15 +65,11 @@ app.get("/listings/new", (req, res)=>{
 
 // Create Route
 
-app.post("/listings", async (req, res)=>{
-    // let {title, description, image, price, location, country} = req.body;
-
+app.post("/listings", wrapAsync(async (req, res, next) => {
     let newListing = await Listing(req.body.listing);
-
-    newListing.save();
-
+    await newListing.save();
     res.redirect("/listings");
-});
+}));
 
 // Show Route
 
@@ -106,6 +103,11 @@ app.delete("/listings/:id", async (req, res)=>{
     res.redirect("/listings");
 });
 
+
+app.use((err, req, res, next) => {
+    let {status = 500, message = "Something Went Wrong!"} = err;
+    res.status(status).send(message);
+});
 
 
 app.listen(port, ()=>{
