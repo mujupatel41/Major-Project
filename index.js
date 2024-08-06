@@ -7,6 +7,7 @@ const path = require("path");
 const Listing = require("./models/listingModel.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const {listingSchema} = require("./schema.js");
 
 const app = express();
 const port = 8080;
@@ -30,25 +31,22 @@ async function main(){
     await mongoose.connect(MONGO_URL);
 };
 
+const validateListing = (req, res, next) => {
+    let {error} = listingSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    } else{
+        next();
+    };
+}
+
 // Testing Route
 
 app.get("/", (req, res)=>{
     res.send("Hii I am @mujupatel41");
 });
 
-// app.get("/testing", async (req, res)=>{
-//     let data = await Listing({
-//         title: "My Home",
-//         description: "Peaceful Place",
-//         image: "",
-//         price: 12999,
-//         location: "Jalgaon, Maharashtra",
-//         country: "India",
-//     });
-//     console.log(data);
-//     data.save();
-//     res.send("Data Collected");
-// });
 
 // Index Route
 
@@ -66,10 +64,7 @@ app.get("/listings/new", (req, res)=>{
 
 // Create Route
 
-app.post("/listings", wrapAsync(async (req, res, next) => {
-    if(!req.body.listing){
-        throw new ExpressError(400, "Send valid data for listing");
-    }
+app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
     let newListing = await Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
@@ -93,10 +88,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res)=>{
 
 // Update Route
 
-app.put("/listings/:id", wrapAsync(async (req, res)=>{
-    if(!req.body.listing){
-        throw new ExpressError(400, "Send valid data for listing");
-    }
+app.put("/listings/:id", validateListing, wrapAsync(async (req, res)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect(`/listings/${id}`);
@@ -110,6 +102,8 @@ app.delete("/listings/:id", wrapAsync(async (req, res)=>{
     res.redirect("/listings");
 }));
 
+// Error Handling
+
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 });
@@ -117,7 +111,6 @@ app.all("*", (req, res, next) => {
 
 app.use((err, req, res, next) => {
     let {status = 500, message = "Something Went Wrong!"} = err;
-    // res.status(status).send(message);
     res.status(status).render("listings/error.ejs", {message});
 });
 
