@@ -4,7 +4,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const path = require("path");
 
-const Listing = require("./models/listingModel.js");
+const ListingModel = require("./models/listingModel.js");
+const ReviewModel = require("./models/reviewModel.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema} = require("./schema.js");
@@ -51,7 +52,7 @@ app.get("/", (req, res)=>{
 // Index Route
 
 app.get("/listings", wrapAsync(async (req, res)=>{
-    let allListings = await Listing.find();
+    let allListings = await ListingModel.find();
 
     res.render("listings/index.ejs", {listings: allListings});
 }));
@@ -65,7 +66,7 @@ app.get("/listings/new", (req, res)=>{
 // Create Route
 
 app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
-    let newListing = await Listing(req.body.listing);
+    let newListing = await ListingModel(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
 }));
@@ -74,7 +75,7 @@ app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
 
 app.get("/listings/:id", wrapAsync(async (req, res)=>{
     let {id} = req.params;
-    let listing = await Listing.findById(id);
+    let listing = await ListingModel.findById(id);
     res.render("listings/show.ejs", {listing});
 }));
 
@@ -82,7 +83,7 @@ app.get("/listings/:id", wrapAsync(async (req, res)=>{
 
 app.get("/listings/:id/edit", wrapAsync(async (req, res)=>{
     let {id} = req.params;
-    let listing = await Listing.findById(id);
+    let listing = await ListingModel.findById(id);
     res.render("listings/edit.ejs", {listing});
 }));
 
@@ -90,7 +91,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res)=>{
 
 app.put("/listings/:id", validateListing, wrapAsync(async (req, res)=>{
     let {id} = req.params;
-    await Listing.findByIdAndUpdate(id, {...req.body.listing});
+    await ListingModel.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect(`/listings/${id}`);
 }));
 
@@ -98,9 +99,23 @@ app.put("/listings/:id", validateListing, wrapAsync(async (req, res)=>{
 
 app.delete("/listings/:id", wrapAsync(async (req, res)=>{
     let {id} = req.params;
-    await Listing.findByIdAndDelete(id);
+    await ListingModel.findByIdAndDelete(id);
     res.redirect("/listings");
 }));
+
+// Review Route 
+
+app.post("/listings/:id/review", async (req, res) =>{
+    let listing = await ListingModel.findById(req.params.id);
+    let newReview = new ReviewModel(req.body.review);
+
+    listing.review.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    res.redirect(`/listings/${listing.id}`)
+});
 
 // Error Handling
 
