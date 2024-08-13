@@ -8,7 +8,7 @@ const ListingModel = require("./models/listingModel.js");
 const ReviewModel = require("./models/reviewModel.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const {listingSchema} = require("./schema.js");
+const {listingSchema, reviewSchema} = require("./schema.js");
 
 const app = express();
 const port = 8080;
@@ -40,7 +40,17 @@ const validateListing = (req, res, next) => {
     } else{
         next();
     };
-}
+};
+
+const validateReview = (req, res, next) => {
+    let {error} = reviewSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    } else{
+        next();
+    };
+};
 
 // Testing Route
 
@@ -105,7 +115,7 @@ app.delete("/listings/:id", wrapAsync(async (req, res)=>{
 
 // Review Route 
 
-app.post("/listings/:id/review", async (req, res) =>{
+app.post("/listings/:id/review", validateReview, wrapAsync(async (req, res) =>{
     let listing = await ListingModel.findById(req.params.id);
     let newReview = new ReviewModel(req.body.review);
 
@@ -115,7 +125,7 @@ app.post("/listings/:id/review", async (req, res) =>{
     await listing.save();
 
     res.redirect(`/listings/${listing.id}`)
-});
+}));
 
 // Error Handling
 
