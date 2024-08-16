@@ -11,6 +11,7 @@ const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema, reviewSchema} = require("./schema.js");
 
 const listings = require("./routes/listing.js");
+const reviews = require("./routes/review.js");
 
 const app = express();
 const port = 8080;
@@ -34,16 +35,6 @@ async function main(){
     await mongoose.connect(MONGO_URL);
 };
 
-const validateReview = (req, res, next) => {
-    let {error} = reviewSchema.validate(req.body);
-    if(error){
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else{
-        next();
-    };
-};
-
 // Testing Route
 
 app.get("/", (req, res)=>{
@@ -51,33 +42,7 @@ app.get("/", (req, res)=>{
 });
 
 app.use("/listings", listings);
-
-// Review Route 
-
-// Post Review Route
-
-app.post("/listings/:id/review", validateReview, wrapAsync(async (req, res) =>{
-    let listing = await ListingModel.findById(req.params.id);
-    let newReview = new ReviewModel(req.body.review);
-
-    listing.review.push(newReview);
-
-    await newReview.save();
-    await listing.save();
-
-    res.redirect(`/listings/${listing.id}`)
-}));
-
-// Delte Review Route
-
-app.delete("/listings/:id/review/:reviewId", wrapAsync(async(req, res) =>{
-    let {id, reviewId} = req.params;
-
-    await ListingModel.findByIdAndUpdate(id, {$pull: {review : reviewId}});
-    await ReviewModel.findByIdAndDelete(reviewId);
-
-    res.redirect(`/listings/${id}`);
-}));
+app.use("/listings/:id/review", reviews);
 
 // Error Handling
 
