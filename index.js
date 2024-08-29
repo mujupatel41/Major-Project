@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const path = require("path");
+const session = require("express-session");
 
 const ExpressError = require("./utils/ExpressError.js");
 
@@ -12,6 +13,12 @@ const reviews = require("./routes/review.js");
 const app = express();
 const port = 8080;
 
+const sessionOptions = {
+    secret: "mujupatel41",
+    resave: false,
+    saveUninitialized: true,
+}
+
 const MONGO_URL = "mongodb://127.0.0.1:27017/Wanderlust";
 
 app.set("view engine", "ejs");
@@ -20,6 +27,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(session(sessionOptions));
 
 app.engine("ejs", ejsMate);
 
