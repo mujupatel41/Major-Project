@@ -4,6 +4,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const path = require("path");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const ExpressError = require("./utils/ExpressError.js");
 
@@ -33,6 +34,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(session(sessionOptions));
+app.use(flash());
 
 app.engine("ejs", ejsMate);
 
@@ -43,6 +45,11 @@ main().then((res)=>{
 async function main(){
     await mongoose.connect(MONGO_URL);
 };
+
+app.use((req, res, next) =>{
+    res.locals.success = req.flash("success");
+    next();
+});
 
 // Testing Route
 
