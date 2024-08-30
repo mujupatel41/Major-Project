@@ -17,6 +17,11 @@ const sessionOptions = {
     secret: "mujupatel41",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    }
 }
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/Wanderlust";
