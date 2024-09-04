@@ -41,6 +41,7 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -66,6 +67,18 @@ app.use((req, res, next) =>{
 app.get("/", (req, res)=>{
     res.send("Hii I am @mujupatel41");
 });
+
+// Demo User
+
+app.get("/demouser", async (req, res) =>{
+    let demoUser = new User({
+        email: "Student@gmail.com",
+        username: "Delta-Student",
+    });
+
+    let registeredUser = await User.register(demoUser, "hellomuju");
+    res.send(registeredUser);
+})
 
 app.use("/listings", listings);
 app.use("/listings/:id/review", reviews);
