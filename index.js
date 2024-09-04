@@ -7,12 +7,13 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const User = require("./models/user.js");
+const User = require("./models/userModel.js");
 
 const ExpressError = require("./utils/ExpressError.js");
 
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 
 const app = express();
 const port = 8080;
@@ -70,18 +71,19 @@ app.get("/", (req, res)=>{
 
 // Demo User
 
-app.get("/demouser", async (req, res) =>{
-    let demoUser = new User({
-        email: "Student@gmail.com",
-        username: "Delta-Student",
-    });
+// app.get("/demouser", async (req, res) =>{
+//     let demoUser = new User({
+//         email: "Student@gmail.com",
+//         username: "Delta-Student",
+//     });
 
-    let registeredUser = await User.register(demoUser, "hellomuju");
-    res.send(registeredUser);
-})
+//     let registeredUser = await User.register(demoUser, "hellomuju");
+//     res.send(registeredUser);
+// })
 
-app.use("/listings", listings);
-app.use("/listings/:id/review", reviews);
+app.use("/listings", listingRouter);
+app.use("/listings/:id/review", reviewRouter);
+app.use("/", userRouter);
 
 // Error Handling
 
