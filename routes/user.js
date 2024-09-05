@@ -19,7 +19,7 @@ router.post("/signup", wrapAsync(async (req, res) =>{
     } catch(err){
         req.flash("error", err.message);
         res.redirect("/signup");
-    }
+    };
 
  }));
 
@@ -41,6 +41,6 @@ router.post("/signup", wrapAsync(async (req, res) =>{
         req.flash("success", "you are logged out!");
         res.redirect("/listings");
     });
- })
+ });
 
 module.exports = router;
