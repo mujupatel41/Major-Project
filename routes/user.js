@@ -8,14 +8,19 @@ router.get("/signup", (req, res) =>{
     res.render("users/signup.ejs");
 });
 
-router.post("/signup", wrapAsync(async (req, res) =>{
+router.post("/signup", wrapAsync(async (req, res, next) =>{
     try{
         let {username, email, password} = req.body;
         let newUser = new User({username, email});
     
         let registeredUser = await User.register(newUser, password);
-        req.flash("success", "Welcome to Airbnb!");
-        res.redirect("/listings");
+        req.login(registeredUser, (err)=>{
+            if(err){
+                return next(err);
+            };
+            req.flash("success", "Welcome to Airbnb!");
+            return res.redirect("/listings");
+        });
     } catch(err){
         req.flash("error", err.message);
         res.redirect("/signup");
@@ -39,7 +44,7 @@ router.post("/signup", wrapAsync(async (req, res) =>{
             return next(err);
         };
         req.flash("success", "you are logged out!");
-        res.redirect("/listings");
+        return res.redirect("/listings");
     });
  });
 

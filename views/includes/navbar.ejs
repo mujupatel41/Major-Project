@@ -8,14 +8,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="/">Home</a>
-                <a class="nav-link" href="/listings">All Listings</a>
-                <a class="nav-link" href="/listings/new">Airbnb your home</a>
             </div>
             <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/listings/new">Airbnb your home</a>
                 <% if(!currUser){ %>
-                    <a class="nav-link" aria-current="page" href="/signup">Sing up</a>
-                    <a class="nav-link" href="/login">Log in</a>
+                    <a class="nav-link active" aria-current="page" href="/signup"><b>Sing Up</b></a>
+                    <a class="nav-link" href="/login"><b>Log In</b></a>
                 <% } %>
                 <% if(currUser){ %>
                     <a class="nav-link" href="/logout">Logout</a>
