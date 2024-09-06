@@ -2,17 +2,16 @@
 <body>
     <div class="row">
         <div class="col-8 offset-3 mt-3">
-            <h3><%= listing.title %> :-</h3>
+            <h3><%= listing.title %></h3>
         </div>
             <div class="card listing-card col-6 offset-3 show-card">
                 <img src="<%= listing.image %>" class="card-img-top show-img" alt="Listing_Image">
                 <div class="card-body mt-2">
-                    <p class="card-text">
-                        <%= listing.description %> <br>
-                        &#8377; <%= listing.price.toLocaleString("en-IN") %> <br>
-                        <%= listing.location %> <br>
-                        <%= listing.country %>
-                    </p>
+                    <p class="card-text"><i><b>Owner:-</b> <%= listing.owner.username %></i> </p>
+                    <p class="card-text"><%= listing.description %></p>
+                    <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %></p>
+                    <p class="card-text"><%= listing.location %></p>
+                    <p class="card-text"><%= listing.country %></p>
                 </div>
             </div>
     </div>
