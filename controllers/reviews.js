@@ -4,7 +4,6 @@ const ReviewModel = require("../models/reviewModel.js");
 module.exports.createReview = async (req, res) =>{
     let listing = await ListingModel.findById(req.params.id);
     let newReview = new ReviewModel(req.body.review);
-
     newReview.author = req.user._id;
     listing.review.push(newReview);
 
