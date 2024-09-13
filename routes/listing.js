@@ -5,6 +5,8 @@ const {listingSchema} = require("../schema.js");
 const ListingModel = require("../models/listingModel.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
+const multer = require("multer");
+const upload = multer({dest: "uploads/"});
 const {isLoggedIn, isOwner, validateListing} = require("../middleware.js");
 
 const ListingController = require("../controllers/listings.js");
@@ -14,7 +16,10 @@ const ListingController = require("../controllers/listings.js");
 
 router.route("/")
 .get(wrapAsync(ListingController.index))
-.post(validateListing, wrapAsync(ListingController.createListing))
+// .post(isLoggedIn, validateListing, wrapAsync(ListingController.createListing))
+.post(upload.single("listing[image]"), (req, res) =>{
+    res.send(req.file)
+})
 
 router.get("/new", isLoggedIn, ListingController.renderNewForm);
 
