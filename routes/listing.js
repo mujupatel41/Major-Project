@@ -17,10 +17,7 @@ const ListingController = require("../controllers/listings.js");
 
 router.route("/")
 .get(wrapAsync(ListingController.index))
-// .post(isLoggedIn, validateListing, wrapAsync(ListingController.createListing))
-.post(upload.single("listing[image]"), (req, res) =>{
-    res.send(req.file.path)
-})
+.post(isLoggedIn,  upload.single("listing[image]"), validateListing, wrapAsync(ListingController.createListing))
 
 router.get("/new", isLoggedIn, ListingController.renderNewForm);
 
