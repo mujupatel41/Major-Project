@@ -5,7 +5,7 @@
         <% for(listing of listings){ %>
             <a href="/listings/<%= listing.id %>" class="listing-link">
                 <div class="card listing-card">
-                    <img src="<%= listing.image %>" class="card-img-top img-hover" alt="Listing_Image">
+                    <img src="<%= listing.image.url %>" class="card-img-top img-hover" alt="Listing_Image">
                     <div class="card-img-overlay">
                         <img src="/Icon/heart-black.png" alt="black_heart" class="black_heart">
                       </div>
