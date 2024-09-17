@@ -33,7 +33,7 @@ const sessionOptions = {
     }
 }
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/Wanderlust";
+const MONGO_URL = "mongodb://127.0.0.1:27017/Airbnb";
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
