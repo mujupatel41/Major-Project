@@ -1,4 +1,7 @@
 <%- layout("/layouts/boilerplate.ejs") %>
+<script>
+    let mapToken = "<%= process.env.MAP_TOKEN %>";
+</script>
 <body>
     <div class="row">
         <div class="col-8 offset-3 mt-3">
@@ -59,7 +62,7 @@
         </form>
         <% } %>
         <hr>
-
+        <% if(listing.review > 0){ %>
         <p><b>All Reveiws</b></p>
 
         <div class="row">    
@@ -78,8 +81,12 @@
 
                 </div>
             <% } %>
-        </div>
+            </div>
+        <% } %>
         
     </div>
-    
+    <div class="col-8 offset-3 mt-3">
+        <h3>Where you'll be</h3>
+        <div id="map"></div>
+    </div>
 </body>
