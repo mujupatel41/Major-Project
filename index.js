@@ -70,9 +70,9 @@ app.use((req, res, next) =>{
 
 // Testing Route
 
-app.get("/", (req, res)=>{
-    res.send("Hii I am @mujupatel41");
-});
+// app.get("/", (req, res)=>{
+//     res.send("Hii I am @mujupatel41");
+// });
 
 // Demo User
 
