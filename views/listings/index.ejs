@@ -165,6 +165,8 @@
                       <p class="card-text">
                         <b><%= listing.title %></b> <br>
                         &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                        <i class="tax-info">&nbsp; &nbsp;+18% GST</i><br>
+                        <i class="tax-info tax-underline ms-1"><i class="rs-sign"><b> &#8377;</i><%= (listing.price*1.18).toLocaleString("en-In") %></b> &nbsp;total after taxes</i>
                         </p>
                     </div>
                   </div>

@@ -72,5 +72,19 @@ document.addEventListener("mouseup", ()=>{
 let taxSwitch = document.getElementById("flexSwitchCheckDefault");
 
 taxSwitch.addEventListener("click", () =>{
-    console.log("Toggle")
+    let taxInfo = document.querySelectorAll(".tax-info");
+    for(info of taxInfo){
+        if(info.style.display != "inline"){
+            info.style.display = "inline"
+        } else{
+            info.style.display = "none"
+        }
+    }
+
+    let lable = document.querySelector(".form-check-label");
+    if(lable.innerText == "Display totle after taxes"){
+        lable.innerText = "Display totle before taxes";
+    } else{
+        lable.innerText = "Display totle after taxes"
+    };
 })
