@@ -1,3 +1,4 @@
+const Listing = require("../models/listingModel.js");
 const ListingModel = require("../models/listingModel.js");
 
 module.exports.index = async (req, res)=>{
@@ -62,4 +63,10 @@ module.exports.destroyListing = async (req, res)=>{
     await ListingModel.findByIdAndDelete(id);
     req.flash("success", "Listing Deleted!")
     res.redirect("/listings");
+};
+
+module.exports.filterListing = async (req, res)=>{
+    let {category} = req.params;
+    let filterListing = await ListingModel.find({category: category})
+    res.render("listings/index.ejs", {listings: filterListing});
 };
