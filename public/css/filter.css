@@ -1,0 +1,134 @@
+.filters-main{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#filters{
+    display: flex;
+    width: 60%;
+    overflow-x: scroll;
+    height: 90px;
+    align-items: center;
+    position: relative;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+#filters.dragging{
+    scroll-behavior: auto;
+}
+
+#filters.dragging a{
+    pointer-events: none;
+}
+
+#filters > a{
+    margin: 0px 1.25rem;
+    text-decoration: none;
+}
+
+@media (max-width:990px){
+    #filters{
+        margin: 0px 0.95rem;
+    }
+    .right_img_button{
+        top: -3.5rem;
+        right: -30rem;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width:768px){
+    #filters{
+        margin: 0px 0.95rem;
+    }
+    .right_img_button{
+        top: -3.5rem;
+        right: 10rem;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width:425px){
+    #filters{
+        margin: 0px 0.65rem;
+    }
+}
+
+#filters::-webkit-scrollbar{
+    display: none;
+}
+
+.filter{
+    text-align: center;
+    margin-right: 1rem;
+    margin-top: 1.5rem;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+.filter:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p{
+    display: block;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.7rem;
+    color: black;
+}
+
+.left_img_button, .right_img_button{
+    position: relative;
+    width: 100px;
+    height: 100%;
+    top: 4rem;
+    display: none;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.left_img_button.active , .right_img_button.active{
+    display: flex;
+}
+
+.right_img_button{
+    top: -3.5rem;
+    right: -45rem;
+    justify-content: flex-end;
+}
+
+.right_img_button i{
+    color: white;
+    background-color: gray;
+    opacity: 0.8;
+    border-radius: 50%;
+    padding: 6px 10px;
+}
+
+.left_img_button i{
+    color: white;
+    background-color: gray;
+    opacity: 0.8;
+    border-radius: 50%;
+    padding: 6px 10px;
+    z-index: 1;
+}
+
+.right_img_button i:hover{
+    opacity: 1;
+}
+
+.left_img_button i:hover{
+    opacity: 1;
+}
+
+.active{
+    text-decoration: underline;
+    opacity: 1;
+}
