@@ -1,8 +1,8 @@
 const removeAllActiveClasses = () =>{
     tabs.forEach(tab =>{
         tab.querySelector("div").classList.remove("active")
-    })
-}
+    });
+};
 
 const tabs = document.querySelectorAll("#filters a");
 const rightArrow = document.querySelector("#filters-main .right_img_button i");
@@ -56,7 +56,7 @@ let drag = (e) =>{
     if(!dragging) return;
     tabList.classList.add("dragging");
     tabList.scrollLeft -= e.movementX;
-}
+};
 
 tabList.addEventListener("mousedown", ()=>{
     dragging = true;
@@ -67,4 +67,10 @@ tabList.addEventListener("mousemove", drag);
 document.addEventListener("mouseup", ()=>{
     dragging = false;
     tabList.classList.remove("dragging");
+});
+
+let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+
+taxSwitch.addEventListener("click", () =>{
+    console.log("Toggle")
 })
