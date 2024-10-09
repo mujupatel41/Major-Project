@@ -129,7 +129,6 @@
 }
 
 .active{
-    text-decoration: underline;
     opacity: 1;
 }
 
@@ -145,4 +144,36 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.position {
+    position: absolute;
+    right: 18rem;
+    top: 7.5rem;
+}
+
+@media (max-width:1285px){
+    .position{
+        right: 5rem;
+    }
+
+    .tax-toggle {
+        height: 3rem;
+        width: 15rem;
+    }
+}
+
+@media (max-width:900px){
+    .position{
+        right: 3rem;
+    }
+}
+
+@media (max-width:768px){
+    .position{
+        display: none;
+    }
+    #filters{
+        width: 90%;
+    }
 }
