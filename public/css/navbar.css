@@ -12,3 +12,25 @@
 .nav-link{
     color: #222222 !important;
 }
+
+.search-btn{
+    background-color: #fe424d !important;
+    color: #fff !important;
+    border-radius: 25px !important;
+    padding: 0px 1rem !important;
+}
+
+.search-btn:hover{
+    background-color: #fe424d !important;
+    color: #fff !important;
+}
+
+.search-btn i{
+    display: inline !important;
+    margin-right: 0.5rem !important;
+}
+
+.search-inp{
+    border-radius: 25px !important;
+    padding: 0.5rem 3rem !important;
+}
