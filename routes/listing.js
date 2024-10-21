@@ -21,6 +21,10 @@ router.route("/")
 
 router.get("/new", isLoggedIn, ListingController.renderNewForm);
 
+// Search Route
+
+router.get("/search", wrapAsync(ListingController.searchListing));
+
 // Show Route
 // Update Route
 // Delete Route
@@ -37,5 +41,6 @@ router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(ListingController.renderE
 // Filter Route
 
 router.get("/filter/:category", wrapAsync(ListingController.filterListing));
+
 
 module.exports = router;
