@@ -1,4 +1,3 @@
-const Listing = require("../models/listingModel.js");
 const ListingModel = require("../models/listingModel.js");
 
 module.exports.index = async (req, res)=>{
@@ -69,4 +68,75 @@ module.exports.filterListing = async (req, res)=>{
     let {category} = req.params;
     let filterListing = await ListingModel.find({category: category})
     res.render("listings/index.ejs", {listings: filterListing});
+};
+
+module.exports.searchListing = async (req, res)=>{
+    let input = req.query.q.trim().replace(/\s+/g, " "); // remove start and end space and middle space remove and middle add one space------
+    
+    if (input == "" || input == " ") {
+		//search value empty
+		req.flash("error", "Search value empty !!!");
+		res.redirect("/listings");
+	}
+
+    // convert every word 1st latter capital and other small---------------
+	let data = input.split("");
+	let element = "";
+	let flag = false;
+	for (let index = 0; index < data.length; index++) {
+		if (index == 0 || flag) {
+			element = element + data[index].toUpperCase();
+		} else {
+			element = element + data[index].toLowerCase();
+		}
+		flag = data[index] == " ";
+	}
+
+    let allListing = await ListingModel.find({
+		title: { $regex: element, $options: "i" },
+	});
+    if (allListing.length != 0) {
+		res.locals.success = "Listings searched by Title";
+		res.render("listings/index.ejs", { listings: allListing });
+		return;
+	}
+
+    if (allListing.length == 0) {
+		allListing = await ListingModel.find({
+			category: { $regex: element, $options: "i" },
+		}).sort({ _id: -1 });
+		if (allListing.length != 0) {
+			res.locals.success = "Listings searched by Category";
+			res.render("listings/index.ejs", { listings: allListing });
+			return;
+		}
+	}
+
+    if (allListing.length == 0) {
+		allListing = await ListingModel.find({
+			country: { $regex: element, $options: "i" },
+		}).sort({ _id: -1 });
+		if (allListing.length != 0) {
+			res.locals.success = "Listings searched by Country";
+			res.render("listings/index.ejs", { listings: allListing });
+			return;
+		}
+	}
+
+    if (allListing.length == 0) {
+		let allListing = await ListingModel.find({
+			location: { $regex: element, $options: "i" },
+		}).sort({ _id: -1 });
+		if (allListing.length != 0) {
+			res.locals.success = "Listings searched by Location";
+			res.render("listings/index.ejs", { listings: allListing });
+			return;
+		}
+	}
+
+    if (allListing.length == 0) {
+		req.flash("error", "Listings is not here !!!");
+		res.redirect("/listings");
+	}
+	console.log(allListing);
 };
