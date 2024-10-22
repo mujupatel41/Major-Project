@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const path = require("path");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -22,7 +23,20 @@ const userRouter = require("./routes/user.js");
 const app = express();
 const port = 8080;
 
+const store = MongoStore.create({
+    mongoUrl: process.env.ATLASDB_URL,
+    crypto: {
+        secret: "mujupatel41",
+    },
+    touchAfter: 24*3600,
+});
+
+store.on("error", (err)=>{
+    console.log("Error in Mongo Session Store", err)
+});
+
 const sessionOptions = {
+    store,
     secret: "mujupatel41",
     resave: false,
     saveUninitialized: true,
@@ -33,7 +47,8 @@ const sessionOptions = {
     }
 }
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/Airbnb";
+const MONGO_URL = process.env.ATLASDB_URL;
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
