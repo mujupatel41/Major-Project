@@ -138,5 +138,4 @@ module.exports.searchListing = async (req, res)=>{
 		req.flash("error", "Listings is not here !!!");
 		res.redirect("/listings");
 	}
-	console.log(allListing);
 };
