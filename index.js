@@ -2,6 +2,8 @@ if(process.env.NODE_ENV != "production"){
     require("dotenv").config();
 };
 
+const dbUrl = process.env.ATLASDB_URL;
+
 const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
@@ -24,7 +26,7 @@ const app = express();
 const port = 8080;
 
 const store = MongoStore.create({
-    mongoUrl: process.env.ATLASDB_URL,
+    mongoUrl: dbUrl,
     crypto: {
         secret: process.env.SECRET,
     },
@@ -46,8 +48,6 @@ const sessionOptions = {
         httpOnly: true,
     }
 }
-
-const MONGO_URL = process.env.ATLASDB_URL;
 
 
 app.set("view engine", "ejs");
