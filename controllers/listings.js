@@ -1,7 +1,7 @@
 const ListingModel = require("../models/listingModel.js");
 
 module.exports.index = async (req, res)=>{
-    let allListings = await ListingModel.find();
+    let allListings = await ListingModel.find().sort({ _id: -1 });
 
     res.render("listings/index.ejs", {listings: allListings});
 };
