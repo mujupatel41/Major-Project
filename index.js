@@ -26,7 +26,7 @@ const port = 8080;
 const store = MongoStore.create({
     mongoUrl: process.env.ATLASDB_URL,
     crypto: {
-        secret: "mujupatel41",
+        secret: process.env.SECRET,
     },
     touchAfter: 24*3600,
 });
@@ -37,7 +37,7 @@ store.on("error", (err)=>{
 
 const sessionOptions = {
     store,
-    secret: "mujupatel41",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -85,21 +85,9 @@ app.use((req, res, next) =>{
 
 // Testing Route
 
-// app.get("/", (req, res)=>{
-//     res.send("Hii I am @mujupatel41");
-// });
-
-// Demo User
-
-// app.get("/demouser", async (req, res) =>{
-//     let demoUser = new User({
-//         email: "Student@gmail.com",
-//         username: "Delta-Student",
-//     });
-
-//     let registeredUser = await User.register(demoUser, "hellomuju");
-//     res.send(registeredUser);
-// })
+app.get("/", (req, res)=>{
+    res.redirect("/listings");
+});
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/review", reviewRouter);
