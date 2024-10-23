@@ -73,7 +73,7 @@ main().then((res)=>{
 }).catch(err => console.log(err));
 
 async function main(){
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 };
 
 app.use((req, res, next) =>{
