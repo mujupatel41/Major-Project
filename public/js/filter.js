@@ -95,7 +95,6 @@ navbarToggler.addEventListener("click", ()=>{
     let filter = document.getElementById("filters-main");
     let listing = document.querySelector(".listing-link");
     let row = document.querySelector(".navbar-nav");
-    let navbarCollaps = document.querySelector("navbar-collapse");
     if(filter.style.display == "none"){
         filter.style.display = "inline";
         row.style.marginTop = "0px";
@@ -103,7 +102,7 @@ navbarToggler.addEventListener("click", ()=>{
     }else{
         filter.style.display = "none";
         row.style.marginTop = "50px";
-        listing.style.marginTop = "150px";
+        listing.style.marginTop = "200px";
     };
 
     

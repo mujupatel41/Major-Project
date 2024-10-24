@@ -15,15 +15,25 @@
                   <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
                 </form>
             </div>
+            <div class="navbar-nav ms-auto mt-2 navbar-taxswitch">
+                <div class="tax-toggle ms-auto sub-taxswitch">
+                    <div class="form-check-reverse form-switch switch-class">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Display total before taxes</label>
+                    </div>
+                </div>
+            </div>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/listings/new">Airbnb your home</a>
+                
+                <a class="nav-link ms-auto" href="/listings/new">Airbnb your home</a>
                 <% if(!currUser){ %>
-                    <a class="nav-link active" aria-current="page" href="/signup"><b>Sing Up</b></a>
-                    <a class="nav-link" href="/login"><b>Log In</b></a>
+                    <a class="nav-link ms-auto active" aria-current="page" href="/signup"><b>Sing Up</b></a>
+                    <a class="nav-link ms-auto" href="/login"><b>Log In</b></a>
                 <% } %>
                 <% if(currUser){ %>
-                    <a class="nav-link" href="/logout"><b>Logout</b></a>
+                    <a class="nav-link ms-auto" href="/logout"><b>Logout</b></a>
                 <% } %>
+               
             </div>
         </div>
     </div>
