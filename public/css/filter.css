@@ -52,6 +52,16 @@
     }
 }
 
+@media (max-width:440px){
+    .left_img_button i, .right_img_button i{
+        display: none;
+    }
+
+    #filters{
+        width: 100%;
+    }
+}
+
 @media (max-width:425px){
     #filters{
         margin: 0px 0.65rem;
