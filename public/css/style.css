@@ -54,29 +54,6 @@ body {
     z-index: 2;
 }
 
-@media (max-width: 769px) {
-    .black_heart {
-        right: -27rem;
-    }
-}
-@media (max-width: 440px) {
-    .black_heart {
-        right: -21rem;
-    }
-}
-
-@media (max-width: 420px) {
-    .black_heart {
-        right: -20rem;
-    }
-}
-
-@media (max-width: 400px) {
-    .black_heart {
-        right: -18rem;
-    }
-}
-
 .black_heart:hover {
     opacity: 1;
 }
@@ -123,3 +100,46 @@ body {
     height: 400px;
     width: 100vh;
  }
+
+ 
+@media (max-width: 769px) {
+    .black_heart {
+        right: -27rem;
+    }
+}
+
+@media (max-width: 470px) {
+    .black_heart {
+        right: -26rem;
+    }
+}
+
+@media (max-width: 460px) {
+    .black_heart {
+        right: -24rem;
+    }
+}
+
+@media (max-width: 440px) {
+    .black_heart {
+        right: -22rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .black_heart {
+        right: -21rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .black_heart {
+        right: -19.3rem;
+    }
+}
+
+@media (max-width: 385px) {
+    .black_heart {
+        right: -18.5rem;
+    }
+}
