@@ -54,6 +54,12 @@ body {
     z-index: 2;
 }
 
+@media (max-width: 400px) {
+    .black_heart {
+        right: -18rem;
+    }
+}
+
 .black_heart:hover {
     opacity: 1;
 }
