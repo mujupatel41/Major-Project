@@ -53,6 +53,17 @@ body {
     opacity: .8;
     z-index: 2;
 }
+@media (max-width: 440px) {
+    .black_heart {
+        right: -21rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .black_heart {
+        right: -20rem;
+    }
+}
 
 @media (max-width: 400px) {
     .black_heart {
