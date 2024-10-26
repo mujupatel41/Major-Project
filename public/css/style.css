@@ -51,7 +51,7 @@ body {
     position: absolute;
     right: -16rem;
     opacity: .8;
-    z-index: 2;
+    z-index: 3;
 }
 
 .black_heart:hover {
