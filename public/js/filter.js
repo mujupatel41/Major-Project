@@ -69,7 +69,7 @@ document.addEventListener("mouseup", ()=>{
     tabList.classList.remove("dragging");
 });
 
-let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+let taxSwitch = document.querySelector(".tax-switch");
 
 taxSwitch.addEventListener("click", () =>{
     let taxInfo = document.querySelectorAll(".tax-info");
@@ -81,11 +81,11 @@ taxSwitch.addEventListener("click", () =>{
         }
     }
 
-    let lable = document.querySelector(".form-check-label");
+    let lable = document.querySelector(".form-check-label span");
     if(lable.innerText == "Display totle after taxes"){
-        lable.innerText = "Display totle before taxes";
+        lable.textContent = "Display totle before taxes";
     } else{
-        lable.innerText = "Display totle after taxes"
+        lable.textContent = "Display totle after taxes"
     };
 });
 
@@ -104,6 +104,10 @@ navbarToggler.addEventListener("click", ()=>{
         row.style.marginTop = "50px";
         listing.style.marginTop = "200px";
     };
-
-    
 })
+
+// let heart = document.querySelector("black_heart");
+// heart.addEventListener("click", (e)=>{
+//     e.preventDefault();
+//     console.log("OK")
+// })
