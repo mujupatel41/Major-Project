@@ -81,7 +81,27 @@ taxSwitch.addEventListener("click", () =>{
         }
     }
 
-    let lable = document.querySelector(".form-check-label span");
+    let lable = document.querySelector(".primary-label span");
+    if(lable.innerText == "Display totle after taxes"){
+        lable.textContent = "Display totle before taxes";
+    } else{
+        lable.textContent = "Display totle after taxes"
+    };
+});
+
+let duoTaxSwitch = document.querySelector(".duo-tax-switch");
+
+duoTaxSwitch.addEventListener("click", () =>{
+    let taxInfo = document.querySelectorAll(".tax-info");
+    for(info of taxInfo){
+        if(info.style.display != "inline"){
+            info.style.display = "inline"
+        } else{
+            info.style.display = "none"
+        }
+    }
+
+    let lable = document.querySelector(".secondary-label span");
     if(lable.innerText == "Display totle after taxes"){
         lable.textContent = "Display totle before taxes";
     } else{
@@ -105,9 +125,3 @@ navbarToggler.addEventListener("click", ()=>{
         listing.style.marginTop = "200px";
     };
 })
-
-// let heart = document.querySelector("black_heart");
-// heart.addEventListener("click", (e)=>{
-//     e.preventDefault();
-//     console.log("OK")
-// })
